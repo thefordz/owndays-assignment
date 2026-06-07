@@ -73,7 +73,7 @@ export function AnalyticsSection() {
 
   return <div className="max-w-7xl mx-auto w-full space-y-4 py-6">
 
-    <div className="grid grid-cols-2">
+    <div className="grid grid-cols-2 gap-4">
       <StatusBanner label="จำนวนคนลงทะเบียนทั้งหมด" count={registrationCount} />
       <StatusBanner label="จำนวนผู้เข้าชมกิจกรรม" count={visitorCount} />
     </div>
