@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_Thai_Looped } from "next/font/google";
 import "./globals.css";
+import { Header } from "./components/Header";
 
 const noto_sans_thai_loops = Noto_Sans_Thai_Looped({
   variable: "--font-noto-sans-thai-loops",
@@ -25,6 +26,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
 
+        <Header />
         <div className="flex-1">
           {children}
         </div>

@@ -5,7 +5,7 @@ import { ToRegistration } from "./ToRegistration";
 export function Campaign() {
   return (
 
-    <div className="relative  min-h-screen ">
+    <div className="relative  min-h-[calc(100vh-64px)]">
       <Image src={"/bg.jpeg"} alt="Photo by Jocelyn Morales on Unsplash" fill className="object-cover " />
 
       <div className="absolute bg-black/40 inset-0 z-0" />
