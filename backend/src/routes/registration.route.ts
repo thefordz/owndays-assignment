@@ -63,4 +63,12 @@ router.get("/", (req, res) => {
   return res.json(registrationData);
 });
 
+router.get("/count", (_req, res) => {
+  let registrationData = ReadData<Registration>(REGISTRATION_FILE);
+
+  const registrationCount = registrationData.length;
+
+  return res.json(registrationCount);
+});
+
 export default router;
