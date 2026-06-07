@@ -4,8 +4,8 @@
 
 import { BRANCHES } from "@/app/lib/constants";
 import { Filters } from "@/app/lib/types";
-import { InputWithLabel } from "../components/InputWithLabel";
-import { SelectWithLabel } from "../components/SelectWithLabel";
+import { InputWithLabel } from "../ui/InputWithLabel";
+import { SelectWithLabel } from "../ui/SelectWithLabel";
 
 interface FilterBarProps {
   filters: Filters,

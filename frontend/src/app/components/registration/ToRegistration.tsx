@@ -1,6 +1,6 @@
 'use client'
 import Link from "next/link";
-import { ButtonWithHint } from "../components/Button";
+import { ButtonWithHint } from "../ui/Button";
 
 export function ToRegistration() {
   return (

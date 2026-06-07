@@ -1,9 +1,9 @@
 'use client'
 
 import { BRANCHES } from "@/app/lib/constants";
-import { InputWithLabel } from "../components/InputWithLabel";
-import { SelectWithLabel } from "../components/SelectWithLabel";
-import { ButtonWithHint } from "../components/Button";
+import { InputWithLabel } from "../ui/InputWithLabel";
+import { SelectWithLabel } from "../ui/SelectWithLabel";
+import { ButtonWithHint } from "../ui/Button";
 import { useForm } from "react-hook-form";
 import { createRegistration, createRegistrationSchema } from "@/app/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
