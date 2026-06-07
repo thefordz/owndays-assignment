@@ -1,3 +1,4 @@
+'use client'
 import { cn } from "@/app/lib/utils";
 import { SelectHTMLAttributes } from "react";
 
@@ -20,7 +21,7 @@ export function SelectWithLabel({ label, required, placeholder, className, error
     {label && (
       <label>{label} {required && <span className="text-red-500">*</span>}</label>
     )}
-    <select className={cn(className, "px-3 py-2.5 bg-gray-200 rounded-lg  appearance-none")} defaultValue={""} {...props} >
+    <select className={cn(className, "px-3 py-2.5 bg-gray-200 rounded-lg  appearance-none")}  {...props} >
 
       {placeholder && <option className="" value={""}>{placeholder}</option>}
       {options.map((option) => (
