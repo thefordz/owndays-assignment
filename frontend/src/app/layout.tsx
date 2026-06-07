@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${noto_sans_thai_loops.className} h-full antialiased`}
+      className={`${noto_sans_thai_loops.className} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col">
 
