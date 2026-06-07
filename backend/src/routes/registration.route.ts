@@ -1,0 +1,40 @@
+import { Router } from "express";
+import { ReadData, WriteData } from "../lib/db";
+import { REGISTRATION_FILE } from "../lib/constants";
+import { createRegistrationSchema } from "../lib/validation";
+import { Registration } from "../lib/types";
+
+const router = Router();
+
+router.post("/", (req, res) => {
+  let data = ReadData<Registration>(REGISTRATION_FILE);
+
+  const result = createRegistrationSchema.safeParse(req.body);
+  if (!result.success) {
+    const errors = result.error.issues.map((issue) => ({
+      field: issue.path.join("."),
+      message: issue.message,
+    }));
+    return res.status(400).json({
+      error: "ข้อมูลไม่ถูกต้อง",
+      errors,
+    });
+  }
+
+  const nextId = data.length
+    ? Math.max(...data.map((registrationData) => registrationData.id)) + 1
+    : 1;
+
+  const newData: Registration = {
+    id: nextId,
+    ...result.data,
+    createdAt: new Date().toISOString(),
+  };
+
+  data.push(newData);
+  WriteData(REGISTRATION_FILE, data);
+
+  return res.status(201).json(newData);
+});
+
+export default router;

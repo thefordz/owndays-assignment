@@ -1,0 +1,8 @@
+export const REGISTRATION_FILE = "registration.json";
+
+export const BRANCHES = [
+  "กรุงเทพมหานคร",
+  "นครศรีธรรมราช",
+  "เชียงใหม่",
+  "ภูเก็ต",
+];
