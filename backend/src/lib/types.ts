@@ -13,3 +13,8 @@ export interface Filters {
   branch?: string;
   date?: string;
 }
+
+export interface Visitor {
+  id: number;
+  visitedAt: string;
+}
