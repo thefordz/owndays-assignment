@@ -7,6 +7,7 @@ import { ButtonWithHint } from "../components/Button";
 import { useForm } from "react-hook-form";
 import { createRegistration, createRegistrationSchema } from "@/app/lib/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { registerEvent } from "@/app/lib/api";
 
 export function RegistrationForm() {
 
@@ -24,9 +25,20 @@ export function RegistrationForm() {
   })
   const errors = form.formState.errors
   const isValid = form.formState.isValid
+  const isLoading = form.formState.isSubmitting
 
   async function onSubmit(data: createRegistration) {
-    alert(JSON.stringify(data, null, 2))
+
+    try {
+      await registerEvent(data)
+      form.reset()
+      alert("ลงทะเบียนสำเร็จ")
+
+    } catch {
+      alert("เกิดข้อผิดพลาด กรุณาลองใหม่")
+
+    }
+
   }
 
 
@@ -50,7 +62,7 @@ export function RegistrationForm() {
       />
       <InputWithLabel
         label="เบอร์โทรศัพท์"
-        type="phone"
+        type="tel"
         placeholder="กรุณาเบอร์โทรศัพท์"
         required
         error={errors.phone?.message}
@@ -74,7 +86,12 @@ export function RegistrationForm() {
         {...form.register("date")}
       />
 
-      <ButtonWithHint type="submit" hint={!isValid ? "กรุณาตรวจสอบรายละเอียดก่อนส่ง" : undefined}>ลงทะเบียน</ButtonWithHint>
+      <ButtonWithHint type="submit" disabled={isLoading} hint={!isValid ? "กรุณาตรวจสอบรายละเอียดก่อนส่ง" : undefined}>
+        {isLoading ?
+          "กำลังส่ง..." :
+          "ลงทะเบียน"
+        }
+      </ButtonWithHint>
 
 
     </form>
