@@ -13,3 +13,8 @@ export async function getRegistrations(filters: Filters) {
   });
   return res.data;
 }
+
+export async function getRegistrationCount() {
+  const res = await api.get<number>("registration/count");
+  return res.data;
+}

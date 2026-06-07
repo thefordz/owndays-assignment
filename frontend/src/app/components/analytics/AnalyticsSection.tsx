@@ -2,13 +2,15 @@
 
 import { useState, useEffect } from "react"
 import { Filters, Registration } from "@/app/lib/types"
-import { getRegistrations } from "@/app/lib/api"
+import { getRegistrationCount, getRegistrations } from "@/app/lib/api"
 import { FilterBar } from "./FilterBar"
 import { RegistrationTable } from "./RegistrationTable"
+import { StatusBanner } from "./StatusBanner"
 
 export function AnalyticsSection() {
 
   const [data, setData] = useState<Registration[] | []>([])
+  const [registrationCount, setRegistrationCount] = useState<number>(0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [filters, setFilters] = useState<Filters>({
@@ -34,7 +36,19 @@ export function AnalyticsSection() {
       }
     }
 
+    async function fetchRegistrationCount() {
+      try {
+        const data = await getRegistrationCount()
+        setRegistrationCount(data)
+      }
+      catch {
+        setRegistrationCount(0)
+      }
+    }
+
     fetchData()
+    fetchRegistrationCount()
+
   }, [filters])
 
 
@@ -46,6 +60,9 @@ export function AnalyticsSection() {
   }
 
   return <div className="max-w-7xl mx-auto w-full space-y-4 py-6">
+
+    <StatusBanner label="จำนวนคนลงทะเบียนทั้งหมด" count={registrationCount} className="md:w-1/3" />
+
     <FilterBar filters={filters} onFilterChange={setFilters} />
 
     <RegistrationTable data={data} />
