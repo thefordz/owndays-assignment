@@ -1,4 +1,7 @@
+import { RegistrationSection } from "./components/registration/RegistrationSection";
 
 export default function Home() {
-  return (<main>Homepage</main>);
+  return (<main>
+    <RegistrationSection />
+  </main>);
 }

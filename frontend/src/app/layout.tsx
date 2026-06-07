@@ -23,7 +23,12 @@ export default function RootLayout({
       lang="en"
       className={`${noto_sans_thai_loops.className} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+
+        <div className="flex-1">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }
