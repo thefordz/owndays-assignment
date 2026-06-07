@@ -2,8 +2,8 @@ import exprese from "express";
 import "dotenv/config";
 import cors from "cors";
 
-import registrationRouter from "../src/routes/registration.route";
-import visitorRouter from "../src/routes/visitor.route";
+import registrationRouter from "./routes/registration.route";
+import visitorRouter from "./routes/visitor.route";
 
 const app = exprese();
 
