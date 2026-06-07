@@ -18,3 +18,13 @@ export async function getRegistrationCount() {
   const res = await api.get<number>("registration/count");
   return res.data;
 }
+
+export async function trackingVisitor() {
+  const res = await api.post("/visitor");
+  return res.data;
+}
+
+export async function getVisitorCount() {
+  const res = await api.get("/visitor");
+  return res.data;
+}

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Filters, Registration } from "@/app/lib/types"
-import { getRegistrationCount, getRegistrations } from "@/app/lib/api"
+import { getRegistrationCount, getRegistrations, getVisitorCount } from "@/app/lib/api"
 import { FilterBar } from "./FilterBar"
 import { RegistrationTable } from "./RegistrationTable"
 import { StatusBanner } from "./StatusBanner"
@@ -11,6 +11,7 @@ export function AnalyticsSection() {
 
   const [data, setData] = useState<Registration[] | []>([])
   const [registrationCount, setRegistrationCount] = useState<number>(0)
+  const [visitorCount, setVisitorCount] = useState<number>(0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [filters, setFilters] = useState<Filters>({
@@ -46,8 +47,19 @@ export function AnalyticsSection() {
       }
     }
 
+    async function fetchVisitorCount() {
+      try {
+        const data = await getVisitorCount()
+        setVisitorCount(data)
+      }
+      catch {
+        setVisitorCount(0)
+      }
+    }
+
     fetchData()
     fetchRegistrationCount()
+    fetchVisitorCount()
 
   }, [filters])
 
@@ -61,7 +73,10 @@ export function AnalyticsSection() {
 
   return <div className="max-w-7xl mx-auto w-full space-y-4 py-6">
 
-    <StatusBanner label="จำนวนคนลงทะเบียนทั้งหมด" count={registrationCount} className="md:w-1/3" />
+    <div className="grid grid-cols-2">
+      <StatusBanner label="จำนวนคนลงทะเบียนทั้งหมด" count={registrationCount} />
+      <StatusBanner label="จำนวนผู้เข้าชมกิจกรรม" count={visitorCount} />
+    </div>
 
     <FilterBar filters={filters} onFilterChange={setFilters} />
 
