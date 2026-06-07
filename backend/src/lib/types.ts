@@ -7,3 +7,9 @@ export interface Registration {
   date: string;
   createdAt: string;
 }
+
+export interface Filters {
+  name?: string;
+  branch?: string;
+  date?: string;
+}

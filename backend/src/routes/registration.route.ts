@@ -2,7 +2,7 @@ import { Router } from "express";
 import { ReadData, WriteData } from "../lib/db";
 import { REGISTRATION_FILE } from "../lib/constants";
 import { createRegistrationSchema } from "../lib/validation";
-import { Registration } from "../lib/types";
+import { Filters, Registration } from "../lib/types";
 
 const router = Router();
 
@@ -35,6 +35,32 @@ router.post("/", (req, res) => {
   WriteData(REGISTRATION_FILE, data);
 
   return res.status(201).json(newData);
+});
+
+router.get("/", (req, res) => {
+  let registrationData = ReadData<Registration>(REGISTRATION_FILE);
+
+  const filters = req.query as Filters;
+
+  const { name, branch, date } = filters;
+
+  if (name) {
+    registrationData = registrationData.filter((data) =>
+      data.name.toLowerCase().trim().includes(name.toLowerCase().trim()),
+    );
+  }
+
+  if (branch) {
+    registrationData = registrationData.filter(
+      (data) => data.branch === branch,
+    );
+  }
+
+  if (date) {
+    registrationData = registrationData.filter((data) => data.date === date);
+  }
+
+  return res.json(registrationData);
 });
 
 export default router;
