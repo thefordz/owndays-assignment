@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Filters, Registration } from "@/app/lib/types"
 import { getRegistrations } from "@/app/lib/api"
 import { FilterBar } from "./FilterBar"
+import { RegistrationTable } from "./RegistrationTable"
 
 export function AnalyticsSection() {
 
@@ -44,10 +45,10 @@ export function AnalyticsSection() {
     <div className=""><span>{error}</span></div>
   }
 
-  return <div className="max-w-7xl mx-auto w-full">
+  return <div className="max-w-7xl mx-auto w-full space-y-4 py-6">
     <FilterBar filters={filters} onFilterChange={setFilters} />
 
-    {JSON.stringify(data, null, 2)}
+    <RegistrationTable data={data} />
   </div>
 
 }
