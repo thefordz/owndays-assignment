@@ -1,5 +1,3 @@
-
-
 'use client'
 
 import { BRANCHES } from "@/app/lib/constants";
@@ -20,13 +18,27 @@ export function FilterBar({ filters, onFilterChange }: FilterBarProps) {
 
   ]
 
+  const hasFilters = filters.name || filters.branch || filters.date
+
+  function clearFilter() {
+    onFilterChange({ name: "", branch: "", date: "" })
+
+  }
+
+
   return (
-    <div className="flex flex-col md:flex-row items-center justify-between gap-4 w-full ">
-      <InputWithLabel className="w-full" label="ค้นหา" value={filters.name} placeholder="ค้นหาด้วยรายชื่อ" onChange={(e) => onFilterChange({ ...filters, name: e.target.value })} />
-      <div className=" flex gap-4  md:items-center flex-row md:flex-row w-full ">
-        <SelectWithLabel className="w-full max-w-md" label="สาขา" value={filters.branch} options={BRANCHE_OPTIONS} onChange={(e) => onFilterChange({ ...filters, branch: e.target.value })} />
-        <InputWithLabel className="w-full max-w-md" label="วันที่" type="date" value={filters.date} placeholder="ค้นหาจากวันที่" onChange={(e) => onFilterChange({ ...filters, date: e.target.value })} />
+    <div className="flex flex-col gap-2">
+      <div className="flex flex-col md:flex-row items-center justify-between gap-4 w-full ">
+        <InputWithLabel className="w-full" label="ค้นหา" value={filters.name} placeholder="ค้นหาด้วยรายชื่อ" onChange={(e) => onFilterChange({ ...filters, name: e.target.value })} />
+        <div className=" flex gap-4  md:items-center flex-row md:flex-row w-full ">
+          <SelectWithLabel className="w-full max-w-md" label="สาขา" value={filters.branch} options={BRANCHE_OPTIONS} onChange={(e) => onFilterChange({ ...filters, branch: e.target.value })} />
+          <InputWithLabel className="w-full max-w-md" label="วันที่" type="date" value={filters.date} placeholder="ค้นหาจากวันที่" onChange={(e) => onFilterChange({ ...filters, date: e.target.value })} />
+        </div>
+
       </div>
+      {hasFilters &&
+        <p className="text-right cursor-pointer " onClick={clearFilter}>Clear Filters</p>
+      }
 
     </div>
   )
